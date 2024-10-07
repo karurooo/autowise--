@@ -9,9 +9,13 @@ export default function GetStarted() {
   const getStarted = () => {
     router.push('/signup');
   };
+
+  const temp = () => {
+    router.push('/verification');
+  };
   return (
     <Container>
-      <Image className="mx-auto my-10 h-40 w-40" source={require('~/assets/Logo.png')} />
+      <Image className="mx-auto my-10 h-40 w-40" source={require('~/assets/images/Logo.png')} />
 
       <View className="my-5  justify-center gap-5 ">
         <Text className="my-4 text-6xl font-bold text-white">
@@ -24,6 +28,7 @@ export default function GetStarted() {
         <Text className=" text-center text-lg font-bold text-white">Find help in minutes</Text>
 
         <Button title="Get Started" onPress={getStarted} />
+        <Button title="Temp" onPress={temp} />
       </View>
     </Container>
   );

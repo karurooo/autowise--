@@ -13,11 +13,17 @@ import { Dropdown } from '~/components/Dropdown';
 import { useUserStore } from '~/store/users';
 import TermsCondition from '~/components/TermsCondition';
 import { signup } from '~/services/signup';
-import { useRouter } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 
 export default function Signup() {
-  const { isVisible, errorTitle, errorMessage, setIsVisible, setErrorTitle, setErrorMessage } =
-    useErrorStore();
+  const {
+    errorVisible,
+    errorTitle,
+    errorMessage,
+    setErrorVisible,
+    setErrorTitle,
+    setErrorMessage,
+  } = useErrorStore();
 
   // Get user information from Zustand store
   const {
@@ -43,7 +49,7 @@ export default function Signup() {
     if (age !== null && age < 18) {
       setErrorTitle('Age Restriction');
       setErrorMessage('You must be at least 18 years old to sign up.');
-      setIsVisible(true);
+      setErrorVisible(true);
       return;
     }
     await signup(
@@ -66,7 +72,7 @@ export default function Signup() {
       },
       setErrorTitle,
       setErrorMessage,
-      setIsVisible,
+      setErrorVisible,
       router
     );
   };
@@ -119,13 +125,22 @@ export default function Signup() {
             ))}
 
             <TermsCondition isChecked={isChecked} setIsChecked={setIsChecked} />
-
+            <View className="my-3 flex flex-row justify-between">
+              <Text className="my-2  h-0.5 w-full bg-white"></Text>
+              {/* <Text className="my-2  h-1 w-2/5 bg-white"></Text> */}
+            </View>
             <Button title="Signup" onPress={handleSignUp} />
+            <Text className="mt-3 text-center text-white">
+              Already have an account?{' '}
+              <Link href="/signin" asChild>
+                <Text className="text-[#1279F2]">Login</Text>
+              </Link>
+            </Text>
             <ErrorAlert
-              title={errorTitle}
-              message={errorMessage}
-              isVisible={isVisible}
-              onClose={() => setIsVisible(false)}
+              errorTitle={errorTitle}
+              errorMessage={errorMessage}
+              errorVisible={errorVisible}
+              onClose={() => setErrorVisible(false)}
             />
           </View>
         </ScrollView>

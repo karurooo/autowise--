@@ -3,58 +3,58 @@ import { create } from 'zustand';
 interface ErrorMessages {
   errorTitle: string;
   errorMessage: string;
-  isVisible: boolean;
-  setErrorTitle: (title: string) => void;
-  setErrorMessage: (message: string) => void;
-  setIsVisible: (visible: boolean) => void;
+  errorVisible: boolean;
+  setErrorTitle: (erorTitle: string) => void;
+  setErrorMessage: (errorMessage: string) => void;
+  setErrorVisible: (errorVisible: boolean) => void;
 }
 
 interface SuccessMessages {
   successTitle: string;
   successMessage: string;
-  isVisible: boolean;
-  setTitle: (successTitle: string) => void;
-  setMessage: (successMessage: string) => void;
-  setIsVisible: (isVisible: boolean) => void;
+  successVisible: boolean;
+  setSuccessTitle: (successTitle: string) => void;
+  setSuccessMessage: (successMessage: string) => void;
+  setSuccessVisible: (successVisible: boolean) => void;
 }
 
 interface ConfirmationMessages {
   confirmationTitle: string;
   confirmationMessage: string;
-  isVisible: boolean;
+  confirmationVisible: boolean;
   isConfirmed: boolean;
 
   setTitle: (confirmationTitle: string) => void;
   setMessage: (confirmationMessage: string) => void;
-  setIsVisible: (isVisible: boolean) => void;
+  setConfirmationVisible: (confirmationVisible: boolean) => void;
   setIsConfirmed: (isConfirmed: boolean) => void;
 }
 
 export const useErrorStore = create<ErrorMessages>((set) => ({
   errorTitle: '',
   errorMessage: '',
-  isVisible: false,
+  errorVisible: false,
   setErrorTitle: (title) => set({ errorTitle: title }),
   setErrorMessage: (message) => set({ errorMessage: message }),
-  setIsVisible: (visible) => set({ isVisible: visible }),
+  setErrorVisible: (visible) => set({ errorVisible: visible }),
 }));
 
-export const useSuccessMessagesStore = create<SuccessMessages>((set) => ({
+export const useSuccessStore = create<SuccessMessages>((set) => ({
   successTitle: '',
   successMessage: '',
-  isVisible: false,
-  setTitle: (successTitle: string) => set({ successTitle }),
-  setMessage: (successMessage: string) => set({ successMessage }),
-  setIsVisible: (isVisible: boolean) => set({ isVisible }),
+  successVisible: false,
+  setSuccessTitle: (successTitle: string) => set({ successTitle }),
+  setSuccessMessage: (successMessage: string) => set({ successMessage }),
+  setSuccessVisible: (successVisible: boolean) => set({ successVisible }),
 }));
 
-export const useConfirmationMessagesStore = create<ConfirmationMessages>((set) => ({
+export const useConfirmationStore = create<ConfirmationMessages>((set) => ({
   confirmationTitle: '',
   confirmationMessage: '',
-  isVisible: false,
+  confirmationVisible: false,
   isConfirmed: false,
   setTitle: (confirmationTitle: string) => set({ confirmationTitle }),
   setMessage: (confirmationMessage: string) => set({ confirmationMessage }),
-  setIsVisible: (isVisible: boolean) => set({ isVisible }),
+  setConfirmationVisible: (confirmationVisible: boolean) => set({ confirmationVisible }),
   setIsConfirmed: (isConfirmed: boolean) => set({ isConfirmed }),
 }));
