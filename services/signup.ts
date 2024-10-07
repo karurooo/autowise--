@@ -1,10 +1,10 @@
 // signupWithEmail.ts
 import supabase from '~/utils/supabase';
 import { passwordValidation } from '../utils/passwordValidation';
-import { Router, router, useRouter } from 'expo-router';
+import { Router } from 'expo-router';
 import { calculateAge } from '~/utils/calculateAge';
 
-export const signupWithEmail = async (
+export const signup = async (
   {
     email,
     password,

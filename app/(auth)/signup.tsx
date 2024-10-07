@@ -12,7 +12,7 @@ import { genderOptions } from '~/constants/gender';
 import { Dropdown } from '~/components/Dropdown';
 import { useUserStore } from '~/store/users';
 import TermsCondition from '~/components/TermsCondition';
-import { signupWithEmail } from '~/services/signupWithEmail';
+import { signup } from '~/services/signup';
 import { useRouter } from 'expo-router';
 
 export default function Signup() {
@@ -34,26 +34,19 @@ export default function Signup() {
     city,
     province,
     zipCode,
-    // isChecked,
-    setFirstName,
-    setLastName,
-    setEmail,
-    setPassword,
-    setConfirmPassword,
     setGender,
     setBirthday,
-    // setIsChecked,
   } = useUserStore();
   const router = useRouter();
 
-  const signup = async () => {
+  const handleSignUp = async () => {
     if (age !== null && age < 18) {
       setErrorTitle('Age Restriction');
       setErrorMessage('You must be at least 18 years old to sign up.');
       setIsVisible(true);
       return;
     }
-    await signupWithEmail(
+    await signup(
       {
         firstName,
         lastName,
@@ -127,7 +120,7 @@ export default function Signup() {
 
             <TermsCondition isChecked={isChecked} setIsChecked={setIsChecked} />
 
-            <Button title="Signup" onPress={signup} />
+            <Button title="Signup" onPress={handleSignUp} />
             <ErrorAlert
               title={errorTitle}
               message={errorMessage}
