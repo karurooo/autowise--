@@ -7,15 +7,14 @@ import { Button } from '~/components/Button';
 export default function GetStarted() {
   const router = useRouter();
   const getStarted = () => {
-    router.push('/signin');
+    router.push('/signup');
   };
+
   return (
     <Container>
-      <View className=" my-10 items-center justify-center">
-        <Image className="h-40 w-40" source={require('~/assets/Logo.png')} />
-      </View>
+      <Image className="mx-auto my-10 h-40 w-40" source={require('~/assets/images/Logo.png')} />
 
-      <View className="my-5 h-1/3 justify-center gap-5 ">
+      <View className="my-5  justify-center gap-5 ">
         <Text className="my-4 text-6xl font-bold text-white">
           Auto<Text className="fold-bold text-6xl text-[#CBB26A]">Wise</Text> {'\n'}
           <Text className="text-4xl font-normal leading-normal ">
