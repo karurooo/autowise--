@@ -32,7 +32,7 @@ const PasswordField: React.FC<PasswordFieldProps> = ({
           placeholder={placeholder}
           secureTextEntry={!isVisible}
           placeholderTextColor={'#7E7E7E'}
-          className="w-full rounded-lg border border-[#7e7e7e] p-4 text-white"
+          className="w-full rounded-lg border border-[#7E7E7E] p-2 px-3 text-white"
         />
         <TouchableOpacity className="absolute right-5 top-3.5" onPress={toggleVisibility}>
           <Entypo name={isVisible ? 'eye' : 'eye-with-line'} size={24} color="#7E7E7E" />

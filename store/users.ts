@@ -1,6 +1,8 @@
 import { create } from 'zustand';
+import supabase from '~/utils/supabase';
 
 interface User {
+  user: any;
   firstName: string;
   lastName: string;
   age: number;
@@ -35,6 +37,13 @@ interface User {
   setIsAuthenticated: (isAuthenticated: boolean) => void;
   setPhoneNumber: (phoneNumber: string) => void;
   setRole: (role: string) => void;
+  setUser: (user: any) => void;
+}
+
+interface UserStore {
+  user: User | null; // The user object or null
+  setUser: (user: User | null) => void; // Method to set the user
+  setAuthenticatedStatus: (isAuthenticated: boolean) => void;
 }
 
 export const useUserStore = create<User>((set) => ({
@@ -72,4 +81,29 @@ export const useUserStore = create<User>((set) => ({
   setIsAuthenticated: (isAuthenticated: boolean) => set({ isAuthenticated }),
   setPhoneNumber: (phoneNumber: string) => set({ phoneNumber }),
   setRole: (role: string) => set({ role }),
+
+  user: null, // Initially, no user is set
+  setUser: (user: User | null) => set({ user }), // Method to set the user
+  // Function to update authenticated status in Zustand and Supabase
+  setAuthenticatedStatus: async (isAuthenticated: boolean) => {
+    set((state) => ({
+      user: {
+        ...state.user,
+        isAuthenticated, // Update only the isAuthenticated status
+      },
+    }));
+
+    // Supabase logic to update status in the database
+    try {
+      const email = useUserStore.getState().user?.email; // Get the email from user
+      if (!email) throw new Error('Email not found in user state');
+
+      const status = isAuthenticated ? 'active' : 'inactive';
+      const { error } = await supabase.from('users').update({ status }).eq('email', email);
+
+      if (error) console.error('Error updating user status:', error.message);
+    } catch (error) {
+      console.error('Error in setAuthenticatedStatus:', error);
+    }
+  },
 }));
