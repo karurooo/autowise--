@@ -10,8 +10,6 @@ export const validateCode = async (
   setIsVisible: (visible: boolean) => void
 ) => {
   try {
-    console.log('Verifying OTP with email:', email);
-    console.log('OTP entered:', otp);
     const { error } = await supabase.auth.verifyOtp({
       email,
       token: otp,
@@ -25,7 +23,7 @@ export const validateCode = async (
       console.log('Error validating code:', error.message);
       return;
     } else {
-      router.push('/onboarding');
+      router.push('/home');
     }
   } catch (error) {
     setErrorTitle('Error');

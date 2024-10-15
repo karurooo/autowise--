@@ -34,7 +34,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ label, onDateChange }) => {
     <View className="my-2">
       <Text className="mb-2 text-lg font-semibold text-white">{label}</Text>
       <TouchableOpacity
-        className="flex-row items-center justify-between rounded-lg  border border-[#7E7E7E] p-4"
+        className="flex-row items-center justify-between rounded-lg  border border-[#7E7E7E] p-3"
         onPress={showDatepicker}>
         <Text className="text-lg text-white">{date.toLocaleDateString()}</Text>
         <Ionicons name="calendar" size={20} color="#fff" />

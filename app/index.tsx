@@ -3,25 +3,35 @@ import { useRouter } from 'expo-router';
 
 import { Container } from '~/components/Container';
 import { Button } from '~/components/Button';
+import { LogoDesc } from '~/components/LogoDesc';
 
 export default function GetStarted() {
   const router = useRouter();
   const getStarted = () => {
-    router.push('/signup');
+    router.push('/getStarted');
+  };
+
+  const toSignin = () => {
+    router.push('/signin');
   };
 
   return (
     <Container>
-      <Image className="mx-auto my-10 h-40 w-40" source={require('~/assets/images/Logo.png')} />
+      <View className="h-1/2 p-4">
+        <View className=" items-end">
+          <Button className="bg-transparent" title="Login" onPress={toSignin} />
+        </View>
 
-      <View className="my-5  justify-center gap-5 ">
+        <Image className="mx-auto h-40 w-40" source={require('~/assets/images/Logo.png')} />
         <Text className="my-4 text-6xl font-bold text-white">
           Auto<Text className="fold-bold text-6xl text-[#CBB26A]">Wise</Text> {'\n'}
           <Text className="text-4xl font-normal leading-normal ">
-            Connecting You to Smart, Fast and Reliable{' '}
-            <Text className="text-[#CBB26A]"> Roadside Assistance</Text>
+            The Easy Way to Find Auto Experts.
           </Text>
         </Text>
+      </View>
+
+      <View className="mx-2  h-1/2 justify-center  ">
         <Text className=" text-center text-lg font-bold text-white">Find help in minutes</Text>
 
         <Button title="Get Started" onPress={getStarted} />

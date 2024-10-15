@@ -14,6 +14,8 @@ import { useUserStore } from '~/store/users';
 import TermsCondition from '~/components/TermsCondition';
 import { signup } from '~/services/signup';
 import { Link, useRouter } from 'expo-router';
+import { LogoDesc } from '~/components/LogoDesc';
+import { useRoleStore } from '~/store/roles';
 
 export default function Signup() {
   const {
@@ -44,6 +46,7 @@ export default function Signup() {
     setBirthday,
   } = useUserStore();
   const router = useRouter();
+  const { selectedRole } = useRoleStore();
 
   const handleSignUp = async () => {
     if (age !== null && age < 18) {
@@ -69,6 +72,7 @@ export default function Signup() {
         province,
         zipCode,
         isChecked,
+        role_id: selectedRole,
       },
       setErrorTitle,
       setErrorMessage,
@@ -90,9 +94,10 @@ export default function Signup() {
         style={{ flex: 1 }}
         keyboardVerticalOffset={60}>
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          <View className="justify-center py-10">
+          <View className="justify-center gap-2 py-2">
+            <LogoDesc />
             <Text className="text-4xl font-bold text-white">Create an account</Text>
-            <Text className="mb-10 text-xl text-white">Enter your account details</Text>
+            <Text className=" text-xl text-white">Enter your account details</Text>
 
             {otherFields.map((field, index) => (
               <View key={index} className="my-2">

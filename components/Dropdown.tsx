@@ -29,7 +29,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
 
       {/* Dropdown Button */}
       <TouchableOpacity
-        className="flex-row items-center justify-between rounded-lg border border-[#7E7E7E]  p-4"
+        className="flex-row items-center justify-between rounded-lg border border-[#7E7E7E]  p-3"
         onPress={() => setModalVisible(true)}
         activeOpacity={0.7}>
         <Text className="text-lg text-white">

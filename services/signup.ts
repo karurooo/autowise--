@@ -3,6 +3,7 @@ import supabase from '~/utils/supabase';
 import { passwordValidation } from '../utils/passwordValidation';
 import { Router } from 'expo-router';
 import { calculateAge } from '~/utils/calculateAge';
+import { useRoleStore } from '~/store/roles';
 
 export const signup = async (
   {
@@ -21,6 +22,7 @@ export const signup = async (
     zipCode,
     isChecked,
     phoneNumber,
+    role_id,
   }: any,
   setErrorTitle: (title: string) => void,
   setErrorMessage: (message: string) => void,
@@ -76,6 +78,7 @@ export const signup = async (
         password,
         phone_number: phoneNumber,
         age,
+        role_id,
       },
     ]);
     router.push('/verification');
