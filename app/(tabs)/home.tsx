@@ -27,7 +27,7 @@ export default function Home() {
               Welcome to Auto
               <Text className="fold-bold text-3xl text-[#CBB26A]">Wise</Text>
             </Text>
-            <Text className="text-lg font-normal leading-normal text-white">
+            <Text className="text-md font-normal leading-normal text-white">
               Your smart and reliable roadside assistant
             </Text>
           </View>

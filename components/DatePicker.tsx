@@ -2,46 +2,64 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Ionicons } from '@expo/vector-icons';
-import { useUserStore } from '~/store/users';
-import { calculateAge } from '~/utils/calculateAge'; // Import the age calculator utility
 
 interface DatePickerProps {
   label: string;
-  onDateChange: (date: Date, age: number) => void; // Modified to pass both date and age
+  initialDate?: Date;
+  onDateChange: (date: Date) => void;
+  mode?: 'date' | 'time' | 'datetime';
 }
 
-const DatePicker: React.FC<DatePickerProps> = ({ label, onDateChange }) => {
-  const [date, setDate] = useState<Date>(new Date());
+const DatePicker: React.FC<DatePickerProps> = ({
+  label,
+  initialDate = new Date(),
+  onDateChange,
+  mode = 'date', // Default mode is 'date'
+}) => {
+  const [date, setDate] = useState<Date>(initialDate);
   const [show, setShow] = useState<boolean>(false);
-  const setBirthday = useUserStore((state) => state.setBirthday);
+  const [isDateSelected, setIsDateSelected] = useState<boolean>(false);
 
-  // Handles date change
+  // Handles date/time change from DateTimePicker
   const onChange = (event: any, selectedDate?: Date | undefined) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
     setDate(currentDate);
-    setBirthday(currentDate); // Set birthday in the Zustand store as Date object
-
-    const age = calculateAge(currentDate); // Calculate the user's age
-    onDateChange(currentDate, age); // Pass both date and calculated age to parent component
+    setIsDateSelected(true);
+    onDateChange(currentDate);
   };
 
-  // Shows the date picker
-  const showDatepicker = () => {
+  // Function to display the DateTimePicker
+  const showPicker = () => {
     setShow(true);
   };
+
   return (
     <View className="my-2">
       <Text className="mb-2 text-lg font-semibold text-white">{label}</Text>
       <TouchableOpacity
-        className="flex-row items-center justify-between rounded-lg  border border-[#7E7E7E] p-3"
-        onPress={showDatepicker}>
-        <Text className="text-lg text-white">{date.toLocaleDateString()}</Text>
-        <Ionicons name="calendar" size={20} color="#fff" />
+        className="h-10  w-36  flex-row items-center justify-between rounded-lg border border-[#7E7E7E] p-1"
+        onPress={showPicker}>
+        <Text className="text-sm text-[#7e7e7e]">
+          {isDateSelected
+            ? mode === 'time'
+              ? date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })
+              : date.toLocaleDateString()
+            : 'Select Date'}
+        </Text>
+
+        <Ionicons name={mode === 'time' ? 'time' : 'calendar'} size={20} color="#fff" />
       </TouchableOpacity>
-      {show && <DateTimePicker value={date} mode="date" display="default" onChange={onChange} />}
+
+      {show && (
+        <DateTimePicker
+          value={date || new Date()} // Ensure value is always valid Date
+          mode={mode} // Can be 'date', 'time', or 'datetime'
+          display="default"
+          onChange={onChange} // Trigger when date/time is selected
+        />
+      )}
     </View>
   );
 };
-
 export default DatePicker;

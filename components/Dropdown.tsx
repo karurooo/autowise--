@@ -29,10 +29,10 @@ export const Dropdown: React.FC<DropdownProps> = ({
 
       {/* Dropdown Button */}
       <TouchableOpacity
-        className="flex-row items-center justify-between rounded-lg border border-[#7E7E7E]  p-3"
+        className="h-10  w-36 flex-row items-center justify-between rounded-lg border border-[#7E7E7E] p-1"
         onPress={() => setModalVisible(true)}
         activeOpacity={0.7}>
-        <Text className="text-lg text-white">
+        <Text className="text-sm text-white">
           {options.find((option) => option.value === selectedValue)?.optionLabel || 'Select'}
         </Text>
         <Ionicons name="chevron-down" size={20} color="#fff" />

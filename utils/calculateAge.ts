@@ -1,4 +1,5 @@
 // utils/calculateAge.ts
+
 export const calculateAge = (birthday: Date): number => {
   const birthDate = birthday; // No need to convert to Date, as it's already a Date object
   const today = new Date();

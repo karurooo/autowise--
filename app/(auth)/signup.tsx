@@ -16,6 +16,7 @@ import { signup } from '~/services/signup';
 import { Link, useRouter } from 'expo-router';
 import { LogoDesc } from '~/components/LogoDesc';
 import { useRoleStore } from '~/store/roles';
+import { calculateAge } from '~/utils/calculateAge';
 
 export default function Signup() {
   const {
@@ -86,6 +87,14 @@ export default function Signup() {
   const otherFields = fields.filter((field) => !field.secureTextEntry);
   const [isChecked, setIsChecked] = useState(false);
   const [age, setAge] = useState<number | null>(null);
+  const [birthdate, setBirthdate] = useState<Date>(new Date());
+
+  const handleDateChange = (date: Date) => {
+    setBirthdate(date); // Update local state
+    setBirthday(date); // Update birthday in Zustand store
+    const age = calculateAge(date); // Calculate age
+    console.log('User age:', age); // Optionally, do something with the age
+  };
 
   return (
     <Container>
@@ -110,13 +119,19 @@ export default function Signup() {
               </View>
             ))}
 
-            <Dropdown
-              label="Gender"
-              options={genderOptions}
-              selectedValue={gender}
-              setSelectedValue={setGender}
-            />
-            <DatePicker label="Date of Birth" onDateChange={setBirthday} />
+            <View className=" flex-row flex-wrap justify-start gap-20">
+              <Dropdown
+                label="Gender"
+                options={genderOptions}
+                selectedValue={gender}
+                setSelectedValue={setGender}
+              />
+              <DatePicker
+                label="Birthdate"
+                initialDate={birthdate}
+                onDateChange={handleDateChange} // Handle birthdate selection
+              />
+            </View>
 
             {passwordFields.map((field, index) => (
               <View key={index} className="my-2">
@@ -135,7 +150,7 @@ export default function Signup() {
               {/* <Text className="my-2  h-1 w-2/5 bg-white"></Text> */}
             </View>
             <Button title="Signup" onPress={handleSignUp} />
-            <Text className="mt-3 text-center text-white">
+            <Text className="mb-6  mt-3 text-center text-white">
               Already have an account?{' '}
               <Link href="/signin" asChild>
                 <Text className="text-[#1279F2]">Login</Text>

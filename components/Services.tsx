@@ -14,7 +14,7 @@ const Services = forwardRef<TouchableOpacity, ServicesProps>(
         ref={ref}
         onPress={onPress}
         {...ServiceProps}
-        className="flex flex-row items-center justify-start gap-2 p-4">
+        className="b flex flex-row items-center justify-start gap-2 border p-4">
         <Image source={image} className="h-16 w-16 rounded-full" />
         <Text className="text-lg font-semibold text-white">{title}</Text>
       </TouchableOpacity>
