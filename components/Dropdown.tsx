@@ -8,6 +8,7 @@ interface DropdownProps {
   options: { optionLabel: string; value: string }[];
   selectedValue: string;
   setSelectedValue: (value: string) => void;
+  style?: object;
 }
 
 export const Dropdown: React.FC<DropdownProps> = ({
@@ -15,6 +16,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
   options,
   selectedValue,
   setSelectedValue,
+  style,
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -25,11 +27,12 @@ export const Dropdown: React.FC<DropdownProps> = ({
 
   return (
     <View className="my-2">
-      <Text className="mb-2 text-lg font-semibold text-white">{label}</Text>
+      <Text className="mb-4 text-lg font-semibold text-white">{label}</Text>
 
       {/* Dropdown Button */}
       <TouchableOpacity
-        className="h-10  w-36 flex-row items-center justify-between rounded-lg border border-[#7E7E7E] p-1"
+        className={`flex-row items-center justify-between rounded-lg border border-[#7E7E7E] px-2 py-1`}
+        style={style}
         onPress={() => setModalVisible(true)}
         activeOpacity={0.7}>
         <Text className="text-sm text-white">
@@ -48,7 +51,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
           className="flex-1 justify-center bg-black/40"
           activeOpacity={1}
           onPressOut={() => setModalVisible(false)}>
-          <View className="mx-auto w-4/5 rounded-lg  bg-[#3E3E3E] p-4">
+          <View className="mx-auto w-4/5 rounded-lg bg-[#3E3E3E] p-4">
             <FlatList
               data={options}
               keyExtractor={(item) => item.value}

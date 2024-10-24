@@ -28,7 +28,6 @@ export default function Signup() {
     setErrorMessage,
   } = useErrorStore();
 
-  // Get user information from Zustand store
   const {
     firstName,
     lastName,
@@ -125,6 +124,7 @@ export default function Signup() {
                 options={genderOptions}
                 selectedValue={gender}
                 setSelectedValue={setGender}
+                style={{ height: 35, width: 125 }}
               />
               <DatePicker
                 label="Birthdate"

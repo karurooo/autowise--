@@ -33,7 +33,7 @@ const TimePicker: React.FC<TimePickerProps> = ({
 
   return (
     <View className="my-2">
-      <Text className="mb-2 text-lg font-semibold text-white">{label}</Text>
+      <Text className="mb-4 text-lg font-semibold text-white">{label}</Text>
       <TouchableOpacity
         className="h-10 w-36  flex-row items-center justify-between rounded-lg border border-[#7E7E7E] p-1"
         onPress={showPicker}>

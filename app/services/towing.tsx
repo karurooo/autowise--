@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View, Text, Touchable, TouchableOpacity, Pressable } from 'react-native';
 import { useState } from 'react';
 import { Container } from '~/components/Container';
 import { useRouter } from 'expo-router';
@@ -7,6 +7,8 @@ import ServiceTypeSelector from '~/components/Services/TypeSelector';
 import DatePicker from '~/components/DatePicker';
 import { useTowingStore } from '~/store/services';
 import TimePicker from '~/components/TimePicker';
+import Vehicles from '~/components/Services/vehicles';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function Towing() {
   const router = useRouter();
@@ -47,7 +49,7 @@ export default function Towing() {
         minute: '2-digit',
         hour12: true,
       });
-      setServiceTime(formattedTime); // Save current time in Zustand store
+      setServiceTime(formattedTime);
     }
   };
 
@@ -79,6 +81,9 @@ export default function Towing() {
                 </View>
               )}
             </View>
+          </View>
+          <View className="my-2 ">
+            <Vehicles />
           </View>
         </View>
       </View>
